@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var model = DictionaryModel()
+    @StateObject var model = ProjectsModel()
     
     var body: some View {
         SuggestionInput(text: self.$model.currentText,

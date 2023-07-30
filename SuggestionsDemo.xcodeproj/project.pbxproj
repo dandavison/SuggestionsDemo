@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37BF6EA82A76FA0500087C23 /* ProjectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BF6EA72A76FA0500087C23 /* ProjectsModel.swift */; };
 		D41ADC5A2511F8090096D817 /* SuggestionsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADC592511F8090096D817 /* SuggestionsDemoApp.swift */; };
 		D41ADC5C2511F8090096D817 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADC5B2511F8090096D817 /* ContentView.swift */; };
 		D41ADC5E2511F80B0096D817 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D41ADC5D2511F80B0096D817 /* Assets.xcassets */; };
@@ -14,7 +15,6 @@
 		D41ADC6B2511F81E0096D817 /* english_german.json in Resources */ = {isa = PBXBuildFile; fileRef = D41ADC692511F81E0096D817 /* english_german.json */; };
 		D41ADC6C2511F81E0096D817 /* german_english.json in Resources */ = {isa = PBXBuildFile; fileRef = D41ADC6A2511F81E0096D817 /* german_english.json */; };
 		D41ADC6E2511F8280096D817 /* SuggestionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADC6D2511F8280096D817 /* SuggestionTextField.swift */; };
-		D41ADC72251212A80096D817 /* DictionaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADC71251212A80096D817 /* DictionaryModel.swift */; };
 		D41C3A1E25B385230077A1B8 /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C3A1D25B385230077A1B8 /* VisualEffectBlur.swift */; };
 		D44818C725850F330084FAED /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44818C625850F330084FAED /* SuggestionsView.swift */; };
 		D44818CA25850F570084FAED /* SuggestionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44818C925850F570084FAED /* SuggestionsModel.swift */; };
@@ -23,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37BF6EA72A76FA0500087C23 /* ProjectsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsModel.swift; sourceTree = "<group>"; };
 		D41ADC562511F8090096D817 /* SuggestionsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuggestionsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41ADC592511F8090096D817 /* SuggestionsDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsDemoApp.swift; sourceTree = "<group>"; };
 		D41ADC5B2511F8090096D817 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,7 +34,6 @@
 		D41ADC692511F81E0096D817 /* english_german.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = english_german.json; sourceTree = "<group>"; };
 		D41ADC6A2511F81E0096D817 /* german_english.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = german_english.json; sourceTree = "<group>"; };
 		D41ADC6D2511F8280096D817 /* SuggestionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionTextField.swift; sourceTree = "<group>"; };
-		D41ADC71251212A80096D817 /* DictionaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryModel.swift; sourceTree = "<group>"; };
 		D41C3A1D25B385230077A1B8 /* VisualEffectBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
 		D44818C625850F330084FAED /* SuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsView.swift; sourceTree = "<group>"; };
 		D44818C925850F570084FAED /* SuggestionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsModel.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 				D41ADC692511F81E0096D817 /* english_german.json */,
 				D41ADC6A2511F81E0096D817 /* german_english.json */,
 				D41ADC592511F8090096D817 /* SuggestionsDemoApp.swift */,
-				D41ADC71251212A80096D817 /* DictionaryModel.swift */,
+				37BF6EA72A76FA0500087C23 /* ProjectsModel.swift */,
 				D41ADC5B2511F8090096D817 /* ContentView.swift */,
 				D448192125858B1D0084FAED /* SuggestionInput.swift */,
 				D41ADC6D2511F8280096D817 /* SuggestionTextField.swift */,
@@ -170,10 +170,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D41ADC6E2511F8280096D817 /* SuggestionTextField.swift in Sources */,
-				D41ADC72251212A80096D817 /* DictionaryModel.swift in Sources */,
 				D44818CA25850F570084FAED /* SuggestionsModel.swift in Sources */,
 				D44818C725850F330084FAED /* SuggestionsView.swift in Sources */,
 				D448192225858B1D0084FAED /* SuggestionInput.swift in Sources */,
+				37BF6EA82A76FA0500087C23 /* ProjectsModel.swift in Sources */,
 				D41C3A1E25B385230077A1B8 /* VisualEffectBlur.swift in Sources */,
 				D41ADC5C2511F8090096D817 /* ContentView.swift in Sources */,
 				D41ADC5A2511F8090096D817 /* SuggestionsDemoApp.swift in Sources */,
