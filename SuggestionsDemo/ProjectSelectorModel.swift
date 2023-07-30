@@ -106,5 +106,21 @@ internal final class ProjectSelectorModel<V: Equatable>: ObservableObject {
         self.textBinding?.wrappedValue = project.text
 
         self.projectConfirmed = true
+
+        Task {
+            do {
+                try await openProject(name: project.text)
+                await NSApplication.shared.terminate(nil)
+            } catch {
+                print("Error while opening project: " + project.text)
+            }
+        }
     }
+
+    internal func openProject(name: String) async throws {
+        let url = URL(string: "http://o/project/" + name)!
+        let _ = try await URLSession.shared.data(from: url)
+    }
+
+
 }
