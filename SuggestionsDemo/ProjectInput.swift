@@ -29,19 +29,19 @@ struct SuggestionInput<V: Equatable>: View {
     @Binding var text: String
     var projectGroups: [ProjectGroup<V>]
     
-    @StateObject var model = SuggestionsModel<V>()
+    @StateObject var model = ProjectSelectorModel<V>()
     
     var body: some View {
         let model = self.model
-        if model.suggestionGroups != self.projectGroups {
-            model.suggestionGroups = self.projectGroups
+        if model.projectGroups != self.projectGroups {
+            model.projectGroups = self.projectGroups
             
-            model.selectedSuggestion = nil
+            model.selectedProject = nil
         }
         model.textBinding = self.$text
         
         return SuggestionTextField(text: self.$text, model: model)
-            .borderlessWindow(isVisible: Binding<Bool>(get: { model.suggestionsVisible && !model.suggestionGroups.isEmpty }, set: { model.suggestionsVisible = $0 }),
+            .borderlessWindow(isVisible: Binding<Bool>(get: { model.projectsVisible && !model.projectGroups.isEmpty }, set: { model.projectsVisible = $0 }),
                               behavior: .transient,
                               anchor: .bottomLeading,
                               windowAnchor: .topLeading,

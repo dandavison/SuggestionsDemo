@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SuggestionView<V: Equatable>: View {
     var suggestion: Project<V>
-    @ObservedObject var model: SuggestionsModel<V>
+    @ObservedObject var model: ProjectSelectorModel<V>
     
     var body: some View {
         let suggestion = self.suggestion
@@ -18,21 +18,21 @@ struct SuggestionView<V: Equatable>: View {
         return Text(suggestion.text)
             .id(suggestion.text)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundColor(model.selectedSuggestion == suggestion ? .white : .primary)
+            .foregroundColor(model.selectedProject == suggestion ? .white : .primary)
             .padding(EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6))
             .background(
                 RoundedRectangle(cornerRadius: 5)
-                    .foregroundColor(model.selectedSuggestion == suggestion ? Color.accentColor : Color.clear)
+                    .foregroundColor(model.selectedProject == suggestion ? Color.accentColor : Color.clear)
             )
             .onHover(perform: { hovering in
                 if hovering {
-                    model.chooseSuggestion(suggestion)
-                } else if model.selectedSuggestion == suggestion {
-                    model.chooseSuggestion(nil)
+                    model.chooseProject(suggestion)
+                } else if model.selectedProject == suggestion {
+                    model.chooseProject(nil)
                 }
             })
             .onTapGesture {
-                model.confirmSuggestion(suggestion)
+                model.confirmProject(suggestion)
             }
     }
 }
@@ -40,7 +40,7 @@ struct SuggestionView<V: Equatable>: View {
 struct SuggestionGroupView<V: Equatable>: View {
     var suggestionGroup: ProjectGroup<V>
     var showDivider: Bool
-    @ObservedObject var model: SuggestionsModel<V>
+    @ObservedObject var model: ProjectSelectorModel<V>
     
     var body: some View {
         let suggestionGroup = self.suggestionGroup
@@ -66,11 +66,11 @@ struct SuggestionGroupView<V: Equatable>: View {
 }
 
 struct SuggestionPopup<V: Equatable>: View {
-    @ObservedObject var model: SuggestionsModel<V>
+    @ObservedObject var model: ProjectSelectorModel<V>
     
     var body: some View {
         let model = self.model
-        let suggestionGroups = model.suggestionGroups
+        let suggestionGroups = model.projectGroups
         
         return VStack(spacing: 0) {
             ForEach(Array(suggestionGroups.enumerated()), id: \.0)  { (suggestionGroupIndex, suggestionGroup) in
@@ -86,9 +86,9 @@ struct SuggestionsView_Previews: PreviewProvider {
         let suggestion1 = Project(text: "Eight", value: "Eight")
         let suggestion2 = Project(text: "Elder", value: "Elder")
         let group = ProjectGroup(title: "English", projects: [suggestion1, suggestion2])
-        let model = SuggestionsModel<String>()
-        model.suggestionGroups = [group]
-        model.selectedSuggestion = suggestion2
+        let model = ProjectSelectorModel<String>()
+        model.projectGroups = [group]
+        model.selectedProject = suggestion2
         
         return SuggestionPopup(model: model)
     }

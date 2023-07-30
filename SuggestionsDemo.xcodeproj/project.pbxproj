@@ -17,9 +17,9 @@
 		D41ADC6E2511F8280096D817 /* SuggestionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41ADC6D2511F8280096D817 /* SuggestionTextField.swift */; };
 		D41C3A1E25B385230077A1B8 /* VisualEffectBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C3A1D25B385230077A1B8 /* VisualEffectBlur.swift */; };
 		D44818C725850F330084FAED /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44818C625850F330084FAED /* SuggestionsView.swift */; };
-		D44818CA25850F570084FAED /* SuggestionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44818C925850F570084FAED /* SuggestionsModel.swift */; };
+		D44818CA25850F570084FAED /* ProjectSelectorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44818C925850F570084FAED /* ProjectSelectorModel.swift */; };
 		D448191C258582D70084FAED /* BorderlessWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448191B258582D60084FAED /* BorderlessWindow.swift */; };
-		D448192225858B1D0084FAED /* SuggestionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448192125858B1D0084FAED /* SuggestionInput.swift */; };
+		D448192225858B1D0084FAED /* ProjectInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448192125858B1D0084FAED /* ProjectInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,9 +36,9 @@
 		D41ADC6D2511F8280096D817 /* SuggestionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionTextField.swift; sourceTree = "<group>"; };
 		D41C3A1D25B385230077A1B8 /* VisualEffectBlur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectBlur.swift; sourceTree = "<group>"; };
 		D44818C625850F330084FAED /* SuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsView.swift; sourceTree = "<group>"; };
-		D44818C925850F570084FAED /* SuggestionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsModel.swift; sourceTree = "<group>"; };
+		D44818C925850F570084FAED /* ProjectSelectorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectorModel.swift; sourceTree = "<group>"; };
 		D448191B258582D60084FAED /* BorderlessWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessWindow.swift; sourceTree = "<group>"; };
-		D448192125858B1D0084FAED /* SuggestionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionInput.swift; sourceTree = "<group>"; };
+		D448192125858B1D0084FAED /* ProjectInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +76,9 @@
 				D41ADC592511F8090096D817 /* SuggestionsDemoApp.swift */,
 				37BF6EA72A76FA0500087C23 /* ProjectsModel.swift */,
 				D41ADC5B2511F8090096D817 /* ContentView.swift */,
-				D448192125858B1D0084FAED /* SuggestionInput.swift */,
+				D448192125858B1D0084FAED /* ProjectInput.swift */,
 				D41ADC6D2511F8280096D817 /* SuggestionTextField.swift */,
-				D44818C925850F570084FAED /* SuggestionsModel.swift */,
+				D44818C925850F570084FAED /* ProjectSelectorModel.swift */,
 				D44818C625850F330084FAED /* SuggestionsView.swift */,
 				D448191B258582D60084FAED /* BorderlessWindow.swift */,
 				D41C3A1D25B385230077A1B8 /* VisualEffectBlur.swift */,
@@ -170,9 +170,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D41ADC6E2511F8280096D817 /* SuggestionTextField.swift in Sources */,
-				D44818CA25850F570084FAED /* SuggestionsModel.swift in Sources */,
+				D44818CA25850F570084FAED /* ProjectSelectorModel.swift in Sources */,
 				D44818C725850F330084FAED /* SuggestionsView.swift in Sources */,
-				D448192225858B1D0084FAED /* SuggestionInput.swift in Sources */,
+				D448192225858B1D0084FAED /* ProjectInput.swift in Sources */,
 				37BF6EA82A76FA0500087C23 /* ProjectsModel.swift in Sources */,
 				D41C3A1E25B385230077A1B8 /* VisualEffectBlur.swift in Sources */,
 				D41ADC5C2511F8090096D817 /* ContentView.swift in Sources */,

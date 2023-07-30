@@ -14,7 +14,7 @@ import Combine
 
 struct SuggestionTextField<V: Equatable>: NSViewRepresentable {
     @Binding var text: String
-    @ObservedObject var model: SuggestionsModel<V>
+    @ObservedObject var model: ProjectSelectorModel<V>
 	
 	func makeNSView(context: Context) -> NSSearchField {
 		let searchField = NSSearchField(frame: .zero)
@@ -45,7 +45,7 @@ struct SuggestionTextField<V: Equatable>: NSViewRepresentable {
             coordinator.updatingSelectedRange = false
         }
         
-        if let selectedSuggestion = model.selectedSuggestion {
+        if let selectedSuggestion = model.selectedProject {
             let suggestionText = selectedSuggestion.text
             
             if searchField.stringValue != suggestionText {
@@ -53,7 +53,7 @@ struct SuggestionTextField<V: Equatable>: NSViewRepresentable {
             }
             
             if let fieldEditor = searchField.window?.fieldEditor(false, for: searchField) {
-                if model.suggestionConfirmed {
+                if model.projectConfirmed {
                     let range = NSRange(suggestionText.startIndex..<suggestionText.endIndex, in: fieldEditor.string)
                     if fieldEditor.selectedRange != range {
                         fieldEditor.selectedRange = range
@@ -78,12 +78,12 @@ struct SuggestionTextField<V: Equatable>: NSViewRepresentable {
     
 	class Coordinator: NSObject, NSSearchFieldDelegate, NSWindowDelegate, NSTableViewDataSource, NSTableViewDelegate {
 		@Binding var text: String
-        var model: SuggestionsModel<V>
+        var model: ProjectSelectorModel<V>
         var didChangeSelectionSubscription: AnyCancellable?
         var frameDidChangeSubscription: AnyCancellable?
         var updatingSelectedRange: Bool = false
 		
-		init(text: Binding<String>, model: SuggestionsModel<V>) {
+		init(text: Binding<String>, model: ProjectSelectorModel<V>) {
 			self._text = text
             self.model = model
             
@@ -97,7 +97,7 @@ struct SuggestionTextField<V: Equatable>: NSViewRepresentable {
                           fieldEditor === textView else {
                         return
                     }
-                    self.model.chooseSuggestion(nil)
+                    self.model.chooseProject(nil)
                 })
 		}
 		
@@ -129,7 +129,7 @@ struct SuggestionTextField<V: Equatable>: NSViewRepresentable {
 		
 		@objc func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
 			if commandSelector == #selector(NSResponder.moveUp(_:)) {
-                guard self.model.suggestionsVisible else {
+                guard self.model.projectsVisible else {
                     return false
                 }
                 self.model.moveUp()
@@ -137,7 +137,7 @@ struct SuggestionTextField<V: Equatable>: NSViewRepresentable {
 			}
 			
 			if commandSelector == #selector(NSResponder.moveDown(_:)) {
-                guard self.model.suggestionsVisible else {
+                guard self.model.projectsVisible else {
                     return false
                 }
                 self.model.moveDown()
@@ -146,7 +146,7 @@ struct SuggestionTextField<V: Equatable>: NSViewRepresentable {
 			
 			if commandSelector == #selector(NSResponder.complete(_:)) ||
                 commandSelector == #selector(NSResponder.cancelOperation(_:)) {
-                guard self.model.suggestionsVisible else {
+                guard self.model.projectsVisible else {
                     return false
                 }
                 self.model.cancel()
@@ -155,8 +155,8 @@ struct SuggestionTextField<V: Equatable>: NSViewRepresentable {
 			}
 			
 			if commandSelector == #selector(NSResponder.insertNewline(_:)) {
-                if let suggestion = self.model.selectedSuggestion {
-                    self.model.confirmSuggestion(suggestion)
+                if let suggestion = self.model.selectedProject {
+                    self.model.confirmProject(suggestion)
                 }
 				
 				return true
