@@ -17,41 +17,50 @@ final class ProjectsModel: ObservableObject {
 
     private var cancellables: Set<AnyCancellable> = []
 
+    func fetchProjects() async throws -> [String] {
+        let url = URL(string: "http://o/list-projects/")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let str = String(data: data, encoding: .utf8)
+        let projects = str?.components(separatedBy: "\n") ?? []
+        return projects
+    }
+
     init() {
         let bundle = Bundle.main
-        do {
-            let url = bundle.url(forResource: "english_german", withExtension: "json")!
-            let data = try! Data(contentsOf: url)
-            let translations = try! JSONDecoder().decode([String:String].self, from: data)
-            self.projects = Array(translations.keys)
+        self.projects = []
+        Task {
+            do {
+                self.projects = try await fetchProjects()
+                self.$currentText
+                    .debounce(for: 0.3, scheduler: RunLoop.main)
+                    .removeDuplicates()
+                    .map { text -> [ProjectGroup<String>] in
+                        guard !text.isEmpty else {
+                            return []
+                        }
+                        let projects = self.projects.lazy.filter({ $0.hasPrefix(text) }).prefix(10).map { word -> Project<String> in
+                            Project(text: word, value: word)
+                        }
+                        var projectGroups: [ProjectGroup<String>] = []
+                        if !projects.isEmpty {
+                            projectGroups.append(ProjectGroup<String>(title: "Projects", projects: Array(projects)))
+                        }
+                        return projectGroups
+                    }
+                    .assign(to: \ProjectsModel.projectGroups, on: self)
+                    .store(in: &cancellables)
+
+                self.$currentText
+                    .debounce(for: 0.3, scheduler: RunLoop.main)
+                    .removeDuplicates()
+                    .map { text -> String? in
+                        return text
+                    }
+                    .assign(to: \ProjectsModel.currentProject, on: self)
+                    .store(in: &cancellables)
+            } catch {
+                print("Error while fetching projects / initializing project list")
+            }
         }
-
-        self.$currentText
-            .debounce(for: 0.3, scheduler: RunLoop.main)
-            .removeDuplicates()
-            .map { text -> [ProjectGroup<String>] in
-                guard !text.isEmpty else {
-                    return []
-                }
-                let projects = self.projects.lazy.filter({ $0.hasPrefix(text) }).prefix(10).map { word -> Project<String> in
-                    Project(text: word, value: word)
-                }
-                var suggestionGroups: [ProjectGroup<String>] = []
-                if !projects.isEmpty {
-                    suggestionGroups.append(ProjectGroup<String>(title: "English", projects: Array(projects)))
-                }
-                return suggestionGroups
-            }
-            .assign(to: \ProjectsModel.projectGroups, on: self)
-            .store(in: &cancellables)
-
-        self.$currentText
-            .debounce(for: 0.3, scheduler: RunLoop.main)
-            .removeDuplicates()
-            .map { text -> String? in
-                return text
-            }
-            .assign(to: \ProjectsModel.currentProject, on: self)
-            .store(in: &cancellables)
     }
 }
