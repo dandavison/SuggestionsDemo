@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SuggestionView<V: Equatable>: View {
-    var suggestion: Suggestion<V>
+    var suggestion: Project<V>
     @ObservedObject var model: SuggestionsModel<V>
     
     var body: some View {
@@ -38,7 +38,7 @@ struct SuggestionView<V: Equatable>: View {
 }
 
 struct SuggestionGroupView<V: Equatable>: View {
-    var suggestionGroup: SuggestionGroup<V>
+    var suggestionGroup: ProjectGroup<V>
     var showDivider: Bool
     @ObservedObject var model: SuggestionsModel<V>
     
@@ -57,7 +57,7 @@ struct SuggestionGroupView<V: Equatable>: View {
                     .font(.system(size: 12, weight: .bold))
             }
             VStack(spacing: 0) {
-                ForEach(Array(suggestionGroup.suggestions.enumerated()), id: \.0)  { (_, suggestion) in
+                ForEach(Array(suggestionGroup.projects.enumerated()), id: \.0)  { (_, suggestion) in
                     SuggestionView(suggestion: suggestion, model: model)
                 }
             }
@@ -83,9 +83,9 @@ struct SuggestionPopup<V: Equatable>: View {
 
 struct SuggestionsView_Previews: PreviewProvider {
     static var previews: some View {
-        let suggestion1 = Suggestion(text: "Eight", value: "Eight")
-        let suggestion2 = Suggestion(text: "Elder", value: "Elder")
-        let group = SuggestionGroup(title: "English", suggestions: [suggestion1, suggestion2])
+        let suggestion1 = Project(text: "Eight", value: "Eight")
+        let suggestion2 = Project(text: "Elder", value: "Elder")
+        let group = ProjectGroup(title: "English", projects: [suggestion1, suggestion2])
         let model = SuggestionsModel<String>()
         model.suggestionGroups = [group]
         model.selectedSuggestion = suggestion2

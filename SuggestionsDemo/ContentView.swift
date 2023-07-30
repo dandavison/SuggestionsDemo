@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         SuggestionInput(text: self.$model.currentText,
-                        suggestionGroups: self.model.suggestionGroups)
+                        projectGroups: self.model.projectGroups)
         .frame(width: 300)
     }
 }

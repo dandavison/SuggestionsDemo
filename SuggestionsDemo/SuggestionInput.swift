@@ -7,34 +7,34 @@
 
 import SwiftUI
 
-struct Suggestion<V: Equatable>: Equatable {
+struct Project<V: Equatable>: Equatable {
     var text: String = ""
     var value: V
     
-    static func ==(_ lhs: Suggestion<V>, _ rhs: Suggestion<V>) -> Bool {
+    static func ==(_ lhs: Project<V>, _ rhs: Project<V>) -> Bool {
         return lhs.value == rhs.value
     }
 }
 
-struct SuggestionGroup<V: Equatable>: Equatable {
+struct ProjectGroup<V: Equatable>: Equatable {
     var title: String?
-    var suggestions: [Suggestion<V>]
+    var projects: [Project<V>]
     
-    static func ==(_ lhs: SuggestionGroup<V>, _ rhs: SuggestionGroup<V>) -> Bool {
-        return lhs.suggestions == rhs.suggestions
+    static func ==(_ lhs: ProjectGroup<V>, _ rhs: ProjectGroup<V>) -> Bool {
+        return lhs.projects == rhs.projects
     }
 }
 
 struct SuggestionInput<V: Equatable>: View {
     @Binding var text: String
-    var suggestionGroups: [SuggestionGroup<V>]
+    var projectGroups: [ProjectGroup<V>]
     
     @StateObject var model = SuggestionsModel<V>()
     
     var body: some View {
         let model = self.model
-        if model.suggestionGroups != self.suggestionGroups {
-            model.suggestionGroups = self.suggestionGroups
+        if model.suggestionGroups != self.projectGroups {
+            model.suggestionGroups = self.projectGroups
             
             model.selectedSuggestion = nil
         }

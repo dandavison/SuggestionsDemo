@@ -9,12 +9,11 @@ import Foundation
 import Combine
 
 final class ProjectsModel: ObservableObject {
-    var englishWords: [String]
-    var englishTranslations: [String:String]
+    var projects: [String]
 
     @Published var currentText: String = ""
-    @Published var suggestionGroups: [SuggestionGroup<String>] = []
-    @Published var currentTranslation: String?
+    @Published var projectGroups: [ProjectGroup<String>] = []
+    @Published var currentProject: String?
 
     private var cancellables: Set<AnyCancellable> = []
 
@@ -23,39 +22,36 @@ final class ProjectsModel: ObservableObject {
         do {
             let url = bundle.url(forResource: "english_german", withExtension: "json")!
             let data = try! Data(contentsOf: url)
-            self.englishTranslations = try! JSONDecoder().decode([String:String].self, from: data)
-            self.englishWords = Array(self.englishTranslations.keys)
+            let translations = try! JSONDecoder().decode([String:String].self, from: data)
+            self.projects = Array(translations.keys)
         }
 
         self.$currentText
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .removeDuplicates()
-            .map { text -> [SuggestionGroup<String>] in
+            .map { text -> [ProjectGroup<String>] in
                 guard !text.isEmpty else {
                     return []
                 }
-                let englishSuggestions = self.englishWords.lazy.filter({ $0.hasPrefix(text) }).prefix(10).map { word -> Suggestion<String> in
-                    Suggestion(text: word, value: word)
+                let projects = self.projects.lazy.filter({ $0.hasPrefix(text) }).prefix(10).map { word -> Project<String> in
+                    Project(text: word, value: word)
                 }
-                var suggestionGroups: [SuggestionGroup<String>] = []
-                if !englishSuggestions.isEmpty {
-                    suggestionGroups.append(SuggestionGroup<String>(title: "English", suggestions: Array(englishSuggestions)))
+                var suggestionGroups: [ProjectGroup<String>] = []
+                if !projects.isEmpty {
+                    suggestionGroups.append(ProjectGroup<String>(title: "English", projects: Array(projects)))
                 }
                 return suggestionGroups
             }
-            .assign(to: \ProjectsModel.suggestionGroups, on: self)
+            .assign(to: \ProjectsModel.projectGroups, on: self)
             .store(in: &cancellables)
 
         self.$currentText
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .removeDuplicates()
             .map { text -> String? in
-                if let englishTranslation = self.englishTranslations[text] {
-                    return englishTranslation
-                }
-                return nil
+                return text
             }
-            .assign(to: \ProjectsModel.currentTranslation, on: self)
+            .assign(to: \ProjectsModel.currentProject, on: self)
             .store(in: &cancellables)
     }
 }
